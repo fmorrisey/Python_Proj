@@ -1,13 +1,14 @@
-#Explores various Python Libaries related to Astronomy
-#Uses Terminal commands to report observations
-#Version 1.0 // August 2020
+# Explores various Python Libaries related to Astronomy
+# Uses Terminal commands to report observations
+# Version 1.0 // August 2020
+# VerAuthor : forrestMorrisey
 
-#Imports System Depend
+# Imports System Depend
 from os import system, name
 from subprocess import call, os
 from time import sleep
 
-#Imports Astronomical Charts
+# Imports Astronomical Charts
 from skyfield.api import load
 from skyfield.api import Topos
 from astropy import units as u
@@ -25,11 +26,11 @@ def _break_():
     pass
 
 def copernicus():
-    #loads timescale
+    # loads timescale
     ts = load.timescale(builtin=True)
     t = ts.now()
 
-    #Computes Position of Mars in the Sky
+    # Computes Position of Mars in the Sky
     planets = load('de421.bsp')
     eph = load('de421.bsp')
     earth, mars = planets['earth'], planets['mars']
@@ -37,26 +38,27 @@ def copernicus():
     astronomic = earth.at(t).observe(mars)
     ra , dec, distance = astronomic.radec()
 
-    #load planets
+    # load planets
     sun, moon, earth = eph['sun'], eph['moon'], eph['earth']
 
-    #Geocentric Coords @ Urban Ecology Center Tower uecTwr
+    # Geocentric Coords @ Urban Ecology Center Tower uecTwr
     uecTwr= earth + Topos('43.067754 N', '-87.891068 W')
     astronomic = uecTwr.at(t).observe(mars)
     alt, az, d = astronomic.apparent().altaz()
 
-    #Astropy API returns
+    # Astropy API returns
     """Fix
     xyz = ?astrometric.postition.to(u.au)?
     altitude = alt.to(u.deg)
     """
 
-    #moonphase
+    # moonphase
     e = earth.at(t)
     _, slon, _ = e.observe(sun).apparent().ecliptic_latlon()
     _, mlon, _ = e.observe(moon).apparent().ecliptic_latlon()
     phase = phasePass = (mlon.degrees - slon.degrees) % 360.0
-    #Convert Variable
+    
+    # Convert Variable
     
     
     if int(phasePass) in range(0, 22):
@@ -86,21 +88,20 @@ def copernicus():
         phaseViz = str("Error Check Code")
     
 
-    #print results_printed
+    # print results_printed
     print("Position and Distance of Mars", ra, dec, distance, " ", sep='\n')
     _break_()
     print("Geocenteric coordinates", alt, az, "", sep='\n')
     _break_()
-    #FIX print(xyz, '{0:0.03f}'.format(altitude))
-    #FIX _break_()
+   
     print("Moon Phase", '{0:.5f}'.format(phase), phaseViz, "", sep='\n')
 
-#Ask for observation length and time in sec
+# Ask for observation length and time in sec
 observationCount = int(input("How long would like to observe the cosmos?:  "))
 observationTime = float(input("How often are these observations?(sec):  "))
 
 
-#Start at 1
+# Start at 1
 observationCount += 1
 observationTime += 1
 
