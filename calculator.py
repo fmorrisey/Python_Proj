@@ -8,9 +8,9 @@ def _welcome_():
     Beep Boop + - * / Math JA """)
 
 def _calculate_():
-    quitChk = "y" #Preassigned
+    quitChk = "y" # Preassigned
 
-    while quitChk == "y": #true
+    while quitChk == "y": # true
         operation = input(str("""
         Please type in the math operation you would like to complete
         + for addition
@@ -26,12 +26,12 @@ def _calculate_():
             operation = input(str("Please enter a valid math operation:  "))
       
         else:
-            while True: #Requests the user for a number
+            while True: # Requests the user for a number
                 try:
                     number_1 = float(input('Enter your first number: '))
                     number_2 = float(input('Enter your second number: '))
                     break
-                except ValueError: #Checks if input is valid
+                except ValueError: # Checks if input is valid
                     print("""============
                     Oops! That was not a valid number! Please try again ...""")
             
