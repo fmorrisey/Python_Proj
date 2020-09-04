@@ -1,3 +1,7 @@
+#Explores various Python Libaries related to Astronomy
+#Uses Terminal commands to report observations
+#Version 1.0 // August 2020
+
 #Imports System Depend
 from os import system, name
 from subprocess import call, os
